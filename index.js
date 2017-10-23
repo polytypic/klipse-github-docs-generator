@@ -72,7 +72,7 @@ function process({
     .replaceIf(stripComments, /\/\/ [^.].*/g, "")
     .replace(/\n{3,}/g, '\n\n')
     .replace(/\[([^\]]*)\]\(\.\/([^)]*)\)/g, `[$1](${blob}$2)`)
-    .replace(new RegExp(esc(`[▶](${site}#`) + "([a-zA-Z-]*)" + esc(")"), "g"),
+    .replace(new RegExp(esc(`[▶](${site}#`) + "([a-zA-Z0-9-]*)" + esc(")"), "g"),
              `[■](${github}#$1)`)
     .replace(new RegExp(esc(site), "g"), "")
     .marked()
