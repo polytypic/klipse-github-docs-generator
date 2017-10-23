@@ -34,7 +34,7 @@ npm i --save-dev klipse-github-docs-generator
 
 To configure the generator the project root needs to have a file named
 `klipse-github-docs.config.js`, which must be a JavaScript file that must
-contain a single function that returns array of configuration objects.  See
+contain a single function that returns an array of configuration objects.  See
 [here](https://github.com/polytypic/fastener/blob/master/klipse-github-docs.config.js)
 for an example.
 
