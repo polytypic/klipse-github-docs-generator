@@ -2,12 +2,11 @@ const fs = require('fs')
 const marked = require('8fold-marked')
 
 const configPath = 'klipse-github-docs.config.js'
-const docsDir = 'docs'
-const docsFwDir = `${docsDir}/fw`
 
 const targets = eval(fs.readFileSync(configPath).toString())().map(target => Object.assign({}, {
   hljsStyle: 'googlecode',
   hljsVersion: '9.8.0',
+  docsDir: 'docs',
   stripComments: false,
   constToVar: false,
   menu: false,
@@ -49,6 +48,7 @@ function process({
   hljsVersion,
   icon,
   ga,
+  docsDir,
   source,
   target,
   title,
@@ -143,8 +143,13 @@ function process({
     ga ? ["fw/clicks-to-ga.js"] : []
   )
 
-  fs.writeFileSync(target,
-  `<!DOCTYPE html>
+
+  if (!fs.existsSync(docsDir))
+    fs.mkdirSync(docsDir)
+
+  fs.writeFileSync(
+    `${docsDir}/${target}`,
+    `<!DOCTYPE html>
 <html>
   <head>
     ${headElems.join("\n    ")}
@@ -158,24 +163,23 @@ function process({
       .join("\n    ")}
   </body>
 </html>`)
+
+  const docsFwDir = `${docsDir}/fw`
+
+  if (!fs.existsSync(docsFwDir))
+    fs.mkdirSync(docsFwDir)
+
+  const srcFwDir = `${__dirname}/fw`
+  fs.readdirSync(srcFwDir).forEach(file => {
+    const srcPath = `${srcFwDir}/${file}`
+    const dstPath = `${docsFwDir}/${file}`
+    const srcData = fs.readFileSync(srcPath).toString()
+    if (!fs.existsSync(dstPath) ||
+        fs.readFileSync(dstPath).toString() !== srcData)
+      fs.writeFileSync(dstPath, srcData)
+  })
 }
 
 //
 
-if (!fs.existsSync(docsDir))
-  fs.mkdirSync(docsDir)
-
-if (!fs.existsSync(docsFwDir))
-  fs.mkdirSync(docsFwDir)
-
 targets.forEach(process)
-
-const srcFwDir = `${__dirname}/fw`
-fs.readdirSync(srcFwDir).forEach(file => {
-  const srcPath = `${srcFwDir}/${file}`
-  const dstPath = `${docsFwDir}/${file}`
-  const srcData = fs.readFileSync(srcPath).toString()
-  if (!fs.existsSync(dstPath) ||
-      fs.readFileSync(dstPath).toString() !== srcData)
-    fs.writeFileSync(dstPath, srcData)
-})
