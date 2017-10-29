@@ -5,7 +5,7 @@ const configPath = 'klipse-github-docs.config.js'
 
 const targets = eval(fs.readFileSync(configPath).toString())().map(target => Object.assign({}, {
   hljsStyle: 'googlecode',
-  hljsVersion: '9.8.0',
+  hljsVersion: '9.12.0',
   docsDir: 'docs',
   stripComments: false,
   constToVar: false,
