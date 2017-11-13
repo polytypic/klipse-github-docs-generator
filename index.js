@@ -29,15 +29,11 @@ marked.setOptions({
   smartypants: false
 })
 
-String.prototype.marked = function () {
-  return marked(this)
+Object.prototype.pipe = function (fn) {
+  return fn(this)
 }
 
-String.prototype.replaceIf = function (c, p, r) {
-  return c ? this.replace(p, r) : this
-}
-
-const esc = s => s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")
+const esc = s => s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
 
 //
 
@@ -62,25 +58,46 @@ function process({
   scripts
 }) {
   const github = `https://github.com/${user}/${project}`
-  const site = `https://${user}.github.io/${project}/`
-  const blob = `${github}/blob/master/`
+  const site = `https://${user}.github.io/${project}/${target}`
+  const blob = `${github}/blob/master`
 
   const body = fs.readFileSync(source)
     .toString()
     .replace(/\(\/#/g, `(${github}/#`)
-    .replaceIf(constToVar, /([^ ])\bconst\b/g, "$1var")
-    .replaceIf(stripComments, /\/\/ [^.].*/g, "")
+    .pipe(s => targets.reduce((s, t) => s.replace(new RegExp(`\\b${esc(t.source)}\\b`, 'g'), t.target), s))
+    .pipe(s => constToVar ? s.replace(/([^ ])\bconst\b/g, '$1var') : s)
+    .pipe(s => stripComments ? s.replace(/^\/\/ [^.].*/gm, '') : s)
     .replace(/\n{3,}/g, '\n\n')
-    .replace(/\[([^\]]*)\]\(\.\/([^)]*)\)/g, `[$1](${blob}$2)`)
-    .replace(new RegExp(esc(`[▶](${site}#`) + "([a-zA-Z0-9-]*)" + esc(")"), "g"),
-             `[■](${github}#$1)`)
-    .replace(new RegExp(esc(site), "g"), "")
-    .marked()
-    .replace(new RegExp(esc(`a href="${github}/#`), "g"), `a target="_blank" href="${github}/#`)
-    .replace(/ id="-[^"]*"/g, "")
+    .replace(/\[([^\]]*)\]\(\.\/([^)]*)\)/g, `[$1](${blob}/$2)`)
+    .replace(new RegExp(esc(`[▶](${site}#`) + '([a-zA-Z0-9-]*)' + esc(')'), 'g'),
+             `[■](${blob}/${source}#$1)`)
+    .replace(new RegExp(esc(site), 'g'), '')
+    .pipe(marked)
+    .replace(new RegExp(esc(`a href="${github}/#`), 'g'), `a target="_blank" href="${github}/#`)
+    .replace(/ id="-[^"]*"/g, '')
     .replace(/<code class="lang-([a-z]*)">/g,
              '<code class="hljs lang-$1">')
-    .replace(/ +$/gm, "")
+    .replace(/ +$/gm, '')
+
+  const idRE = /\bid\s*=\s*"([^"]+)"/g
+  const ids = new Map()
+  for (;;) {
+    const m = idRE.exec(body)
+    if (!m)
+      break
+    if (ids.has(m[1]))
+      console.warn(`Duplicate id '${m[1]}' in '${source}'`)
+    ids.set(m[1], 1)
+  }
+
+  const hhrefRE = /\bhref="#([^"]+)"/g
+  for (;;) {
+    const m = hhrefRE.exec(body)
+    if (!m)
+      break
+    if (!ids.has(m[1]))
+      console.warn(`Target of internal link '${m[1]}' does not exist in '${source}'`)
+  }
 
   const headElems = [
     `<meta charset="utf-8">`,
@@ -125,7 +142,7 @@ function process({
   const postBodyElems = [
     afterLoadStmts.length && `<div class="loading-hidden">
       <pre><code class="hljs lang-js">
-        ${afterLoadStmts.join("\n        ")}
+        ${afterLoadStmts.join('\n        ')}
       </code></pre>
     </div>`
   ].filter(x => x)
@@ -133,16 +150,15 @@ function process({
   const allScripts = [].concat(
     klipse ? scripts : [],
     klipse ?
-      ["fw/klipse-settings.js",
-       "https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js"] : [],
+      ['fw/klipse-settings.js',
+       'https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js'] : [],
     [`https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${hljsVersion}/highlight.min.js`,
      `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${hljsVersion}/languages/javascript.min.js`,
-     "fw/init-hljs.js"],
-    menu ? ["fw/menu.js"] : [],
-    tooltips ? ["fw/tooltips.js"] : [],
-    ga ? ["fw/clicks-to-ga.js"] : []
+     'fw/init-hljs.js'],
+    menu ? ['fw/menu.js'] : [],
+    tooltips ? ['fw/tooltips.js'] : [],
+    ga ? ['fw/clicks-to-ga.js'] : []
   )
-
 
   if (!fs.existsSync(docsDir))
     fs.mkdirSync(docsDir)
@@ -152,12 +168,12 @@ function process({
     `<!DOCTYPE html>
 <html>
   <head>
-    ${headElems.join("\n    ")}
+    ${headElems.join('\n    ')}
   </head>
   <body class="markdown-body">
-    ${preBodyElems.join("\n    ")}
+    ${preBodyElems.join('\n    ')}
     ${body}
-    ${postBodyElems.join("\n    ")}
+    ${postBodyElems.join('\n    ')}
     ${allScripts
       .map(src => `<script type="text/javascript" src="${src}"></script>`)
       .join("\n    ")}

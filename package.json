@@ -1,6 +1,6 @@
 {
   "name": "klipse-github-docs-generator",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "Generates HTML pages with Klipse snippets from GitHub markdown",
   "repository": {
     "type": "git",
@@ -20,6 +20,6 @@
     "klipse-github-docs-generator": "./klipse-github-docs-generator"
   },
   "dependencies": {
-    "8fold-marked": "^0.3.7"
+    "8fold-marked": "^0.3.8"
   }
 }
