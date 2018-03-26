@@ -1,5 +1,5 @@
 const fs = require('fs')
-const marked = require('8fold-marked')
+const marked = require('marked')
 
 const configPath = 'klipse-github-docs.config.js'
 
@@ -87,7 +87,7 @@ function process({
       `[■](${blob}/${source}#$1)`
     )
     .replace(new RegExp(esc(site), 'g'), '')
-    .pipe(marked)
+    .pipe(s => marked(String(s)))
     .replace(
       new RegExp(esc(`a href="${github}/#`), 'g'),
       `a target="_blank" href="${github}/#`
