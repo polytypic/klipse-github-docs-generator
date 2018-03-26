@@ -21,5 +21,9 @@
   },
   "dependencies": {
     "marked": "^0.3.19"
+  },
+  "scripts": {
+    "prepare": "node index.js",
+    "test": "node index.js"
   }
 }

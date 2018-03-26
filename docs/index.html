@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Klipse GitHub Docs Generator</title>
+    <link rel="stylesheet" type="text/css" href="fw/github.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/googlecode.min.css">
+    <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="fw/styles.css">
+  </head>
+  <body class="markdown-body">
+    <div class="loading-message">
+      Please wait... The interactive code snippets on this page take a moment to render.
+    </div>
+    <p>
+      All the code snippets on this page are <b>live</b> and <b>interactive</b>
+      powered by the <a target="_blank" href="https://github.com/viebel/klipse">klipse
+      plugin</a>.
+    </p>
+    <hr>
+    <h1 id="klipse-github-docs-generator-github-stars-npm">Klipse GitHub Docs Generator &middot; <a href="https://github.com/polytypic/klipse-github-docs-generator"><img src="https://img.shields.io/github/stars/polytypic/klipse-github-docs-generator.svg?style=social" alt="GitHub stars"></a> <a href="https://www.npmjs.com/package/klipse-github-docs-generator"><img src="https://img.shields.io/npm/dm/klipse-github-docs-generator.svg" alt="npm"></a></h1>
+<p>This is a minimalistic tool to generate HTML pages with
+<a href="https://github.com/viebel/klipse">Klipse</a> snippets from GitHub markdown.</p>
+<p>Examples:</p>
+<ul>
+<li><a href="https://polytypic.github.io/fastener/">Fastener</a></li>
+<li><a href="https://calmm-js.github.io/partial.lenses.validation/">Partial Lenses Validation</a></li>
+</ul>
+<p>This tool is still rough around the edges.  Feel free to contribute
+improvements!</p>
+<p><a href="http://badge.fury.io/js/klipse-github-docs-generator"><img src="https://badge.fury.io/js/klipse-github-docs-generator.svg" alt="npm version"></a>
+<a href="https://david-dm.org/polytypic/klipse-github-docs-generator"><img src="https://david-dm.org/polytypic/klipse-github-docs-generator.svg" alt=""></a> <a href="https://david-dm.org/polytypic/klipse-github-docs-generator?type=dev"><img src="https://david-dm.org/polytypic/klipse-github-docs-generator/dev-status.svg" alt=""></a></p>
+<h2 id="usage">Usage</h2>
+<p>First of all you need to have a GitHub markdown file with the documentation that
+includes the snippets that you want to klipsify.  See
+<a href="https://github.com/polytypic/fastener/blob/master/index.html">here</a> for an
+example.  The essential part is having code snippets in the markdown that can be
+evaluated in a browser &mdash; like this:</p>
+<pre><code class="hljs lang-js">1 + 2
+
+</code></pre>
+<p>Click
+<a href="#usage">here</a>
+to evaluate the above in the browser.</p>
+<p>Import statements do not work and you should have those marked in a different
+language.  Like this:</p>
+<pre><code class="hljs lang-jsx">import from &#39;some-awesome-library&#39;
+</code></pre>
+<h3 id="install-klipse-github-docs-generator">Install <code>klipse-github-docs-generator</code></h3>
+<p>Install <code>klipse-github-docs-generator</code> as a dev dependency:</p>
+<pre><code class="hljs lang-bash">npm i --save-dev klipse-github-docs-generator
+</code></pre>
+<h3 id="klipse-github-docs-config-js"><code>klipse-github-docs.config.js</code></h3>
+<p>To configure the generator the project root needs to have a file named
+<code>klipse-github-docs.config.js</code>, which must be a JavaScript file that must
+contain a single function that returns an array of configuration objects.  See
+<a href="https://github.com/polytypic/fastener/blob/master/klipse-github-docs.config.js">here</a>
+for an example.</p>
+<h3 id="generate-docs">Generate docs</h3>
+<p>To generate <code>docs</code> you run the command:</p>
+<pre><code class="hljs lang-bash">npx klipse-github-docs-generator
+</code></pre>
+<p>You can also implement your own npm scripts to e.g. watch files to rebuild docs
+and reload browser to make editing feedback faster.</p>
+
+    <div class="loading-hidden">
+      <pre><code class="hljs lang-js">
+        document.querySelector('.loading-message').className = "loading-hidden";
+        accelerate_klipse();
+      </code></pre>
+    </div>
+    <script type="text/javascript" src="fw/klipse-settings.js"></script>
+    <script type="text/javascript" src="https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script type="text/javascript" src="fw/init-hljs.js"></script>
+  </body>
+</html>

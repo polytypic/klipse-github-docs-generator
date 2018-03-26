@@ -6,5 +6,6 @@
 bench
 bower.json
 docs
+klipse-github-docs.config.js
 scripts
 test

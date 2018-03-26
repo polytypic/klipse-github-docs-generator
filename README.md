@@ -19,8 +19,23 @@ First of all you need to have a GitHub markdown file with the documentation that
 includes the snippets that you want to klipsify.  See
 [here](https://github.com/polytypic/fastener/blob/master/README.md) for an
 example.  The essential part is having code snippets in the markdown that can be
-evaluated in a browser.  Import statements do not work and you should have those
-marked in a different language.
+evaluated in a browser &mdash; like this:
+
+```js
+1 + 2
+// 3
+```
+
+Click
+[here](https://polytypic.github.io/klipse-github-docs-generator/index.html#usage)
+to evaluate the above in the browser.
+
+Import statements do not work and you should have those marked in a different
+language.  Like this:
+
+```jsx
+import from 'some-awesome-library'
+```
 
 ### Install `klipse-github-docs-generator`
 
