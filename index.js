@@ -93,7 +93,7 @@ function process({
       `a target="_blank" href="${github}/#`
     )
     .replace(/ id="-[^"]*"/g, '')
-    .replace(/<code class="lang-([a-z]*)">/g, '<code class="hljs lang-$1">')
+    .replace(/<code class="language-([a-z]*)">/g, '<code class="hljs lang-$1">')
     .replace(/ +$/gm, '')
 
   const idRE = /\bid\s*=\s*"([^"]+)"/g
