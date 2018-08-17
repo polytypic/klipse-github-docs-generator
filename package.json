@@ -1,6 +1,6 @@
 {
   "name": "klipse-github-docs-generator",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Generates HTML pages with Klipse snippets from GitHub markdown",
   "repository": {
     "type": "git",
@@ -20,7 +20,7 @@
     "klipse-github-docs-generator": "./klipse-github-docs-generator"
   },
   "dependencies": {
-    "marked": "^0.4.0"
+    "marked": "^0.5.0"
   },
   "scripts": {
     "prepare": "node index.js",
