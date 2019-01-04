@@ -5,7 +5,7 @@
     <title>Klipse GitHub Docs Generator</title>
     <link rel="stylesheet" type="text/css" href="fw/github.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/googlecode.min.css">
-    <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/klipse@7.6.9/dist/codemirror.css">
     <link rel="stylesheet" type="text/css" href="fw/styles.css">
   </head>
   <body class="markdown-body">
@@ -18,7 +18,7 @@
       plugin</a>.
     </p>
     <hr>
-    <h1 id="klipse-github-docs-generator-github-stars-npm">Klipse GitHub Docs Generator &middot; <a href="https://github.com/polytypic/klipse-github-docs-generator"><img src="https://img.shields.io/github/stars/polytypic/klipse-github-docs-generator.svg?style=social" alt="GitHub stars"></a> <a href="https://www.npmjs.com/package/klipse-github-docs-generator"><img src="https://img.shields.io/npm/dm/klipse-github-docs-generator.svg" alt="npm"></a></h1>
+    <h1 id="klipse-github-docs-generator--github-stars-npm">Klipse GitHub Docs Generator &middot; <a href="https://github.com/polytypic/klipse-github-docs-generator"><img src="https://img.shields.io/github/stars/polytypic/klipse-github-docs-generator.svg?style=social" alt="GitHub stars"></a> <a href="https://www.npmjs.com/package/klipse-github-docs-generator"><img src="https://img.shields.io/npm/dm/klipse-github-docs-generator.svg" alt="npm"></a></h1>
 <p>This is a minimalistic tool to generate HTML pages with
 <a href="https://github.com/viebel/klipse">Klipse</a> snippets from GitHub markdown.</p>
 <p>Examples:</p>
@@ -47,7 +47,7 @@ language.  Like this:</p>
 <h3 id="install-klipse-github-docs-generator">Install <code>klipse-github-docs-generator</code></h3>
 <p>Install <code>klipse-github-docs-generator</code> as a dev dependency:</p>
 <pre><code class="hljs lang-bash">npm i --save-dev klipse-github-docs-generator</code></pre>
-<h3 id="klipse-github-docs-config-js"><code>klipse-github-docs.config.js</code></h3>
+<h3 id="klipse-github-docsconfigjs"><code>klipse-github-docs.config.js</code></h3>
 <p>To configure the generator the project root needs to have a file named
 <code>klipse-github-docs.config.js</code>, which must be a JavaScript file that must
 contain a single function that returns an array of configuration objects.  See
@@ -66,7 +66,7 @@ and reload browser to make editing feedback faster.</p>
       </code></pre>
     </div>
     <script type="text/javascript" src="fw/klipse-settings.js"></script>
-    <script type="text/javascript" src="https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/klipse@7.6.9/dist/klipse_plugin.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
     <script type="text/javascript" src="fw/init-hljs.js"></script>

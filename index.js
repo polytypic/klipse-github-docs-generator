@@ -123,7 +123,7 @@ function process({
     hljsStyle &&
       `<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${hljsVersion}/styles/${hljsStyle}.min.css">`,
     klipse &&
-      `<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css">`,
+      `<link rel="stylesheet" type="text/css" href="https://unpkg.com/klipse@7.6.9/dist/codemirror.css">`,
     `<link rel="stylesheet" type="text/css" href="fw/styles.css">`,
     ga && `<script type="text/javascript">startTime = Date.now()</script>`,
     ga &&
@@ -179,7 +179,7 @@ function process({
     klipse
       ? [
           'fw/klipse-settings.js',
-          'https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js'
+          'https://unpkg.com/klipse@7.6.9/dist/klipse_plugin.min.js'
         ]
       : [],
     [
