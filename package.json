@@ -20,7 +20,7 @@
     "klipse-github-docs-generator": "./klipse-github-docs-generator"
   },
   "dependencies": {
-    "marked": "^0.6.0"
+    "marked": "^0.8.0"
   },
   "scripts": {
     "prepare": "node index.js",
